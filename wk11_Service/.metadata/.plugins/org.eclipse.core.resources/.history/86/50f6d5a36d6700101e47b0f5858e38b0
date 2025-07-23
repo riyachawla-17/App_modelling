@@ -1,0 +1,19 @@
+package com.va.week10.controller;
+
+import com.va.week10.MarketService;
+import com.va.week10.model.Market;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/market")
+public class MarketController {
+
+    @Autowired
+    private MarketService marketService;
+
+    @PostMapping("/process")
+    public Market processOrder(@RequestBody Market marketOrder) {
+        return marketService.processMarketOrder(marketOrder);
+    }
+}

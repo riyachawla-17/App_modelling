@@ -1,0 +1,26 @@
+package com.va.week10;
+
+import com.va.week10.model.Market;
+import com.va.week10.repository.MarketRepo;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class MarketService {
+
+    @Autowired
+    private MarketRepo marketRepository;
+
+    public List<Market> getAllMarketOrders() {
+        return marketRepository.findAll();
+    }
+
+    public Market processMarketOrder(Market marketOrder) {
+        marketOrder.setOrderStatus("PROCESSED");
+        marketOrder.setProcessedBy("MarketEngine_v1");
+        return marketRepository.save(marketOrder);
+    }
+}

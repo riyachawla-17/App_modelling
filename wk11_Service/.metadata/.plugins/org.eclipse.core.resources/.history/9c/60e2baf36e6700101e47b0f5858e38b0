@@ -1,0 +1,22 @@
+spring.application.name=Assign4_EurekaService1
+
+server.port=8082
+
+# MongoDB Atlas connection
+spring.data.mongodb.uri=mongodb+srv://ITE5315-Riya:Riya%402314@ite5315-riya.dxfg7.mongodb.net?retryWrites=true&w=majority
+
+# Eureka Configuration
+eureka.client.service-url.defaultZone=http://localhost:8761/eureka/
+eureka.client.register-with-eureka=true
+eureka.client.fetch-registry=true
+eureka.instance.hostname=localhost
+eureka.instance.instance-id=${spring.application.name}:${server.port}
+spring.cloud.client.hostname=localhost
+spring.cloud.discovery.enabled=true
+
+# Logging Configuration (Optional)
+logging.level.org.springframework=ERROR
+logging.level.com=TRACE
+
+# Profile (Optional)
+spring.profiles.active=dev

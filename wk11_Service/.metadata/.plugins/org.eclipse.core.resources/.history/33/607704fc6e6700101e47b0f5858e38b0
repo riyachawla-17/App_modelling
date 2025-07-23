@@ -1,0 +1,21 @@
+spring.application.name=Assign4_EurekaService1
+server.port=9090
+
+# MongoDB Atlas connection
+spring.data.mongodb.uri=mongodb+srv://ITE5315-Riya:Riya%402314@ite5315-riya.dxfg7.mongodb.net/<dbname>?retryWrites=true&w=majority
+
+# Eureka Client (fixed to not use placeholder variables)
+eureka.client.service-url.defaultZone=http://localhost:8761/eureka/
+spring.cloud.discovery.enabled=true
+
+# Prevent Eureka from using your machine hostname
+eureka.instance.hostname=localhost
+eureka.instance.instance-id=${spring.application.name}:${server.port}
+spring.cloud.client.hostname=localhost
+
+# Optional Logging
+logging.level.org.springframework=ERROR
+logging.level.com=TRACE
+
+# Optional Profile
+spring.profiles.active=dev
