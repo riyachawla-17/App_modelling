@@ -30,8 +30,7 @@ public class Market {
     private double last;
 
     @NotBlank
-    private String typeOfExchange; // NYSE, TSE, Nasdaq, etc.
-
+    private String typeOfExchange; 
     @NotNull
     private ConfirmationStatus confirmationStatus = ConfirmationStatus.PENDING;
 
@@ -39,8 +38,7 @@ public class Market {
         PENDING, CONFIRMED, REJECTED
     }
 
-    // ===== Getters and Setters =====
-
+   
     public String getId() {
         return id;
     }

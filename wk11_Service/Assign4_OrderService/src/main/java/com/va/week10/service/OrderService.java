@@ -15,8 +15,7 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
     private final ObjectMapper objectMapper;
-    private final RestTemplate restTemplate; // optional (can be null if you don’t wire it)
-
+    private final RestTemplate restTemplate;
     public OrderService(OrderRepository orderRepository,
                         ObjectMapper objectMapper,
                         Optional<RestTemplate> restTemplateOpt) {
@@ -27,19 +26,16 @@ public class OrderService {
 
     public Order placeOrder(Order order) throws Exception {
         Order saved = orderRepository.save(order);
-        // write a handoff JSON so other services can read it if desired
         File out = new File("target/handoff/order-latest.json");
         out.getParentFile().mkdirs();
         objectMapper.writerWithDefaultPrettyPrinter().writeValue(out, saved);
         return saved;
     }
 
-    /** Save order, then call MarketService to process it (dynamic JSON handoff). */
-    public Order placeAndSendToMarket(Order order) throws Exception {
+   public Order placeAndSendToMarket(Order order) throws Exception {
         Order saved = placeOrder(order); // saves + writes JSON file
 
         if (restTemplate != null) {
-            // minimal payload MarketService expects
             Map<String, Object> payload = Map.of(
                     "stockSymbol", saved.getStockSymbol(),
                     "quantity", saved.getQuantity()
