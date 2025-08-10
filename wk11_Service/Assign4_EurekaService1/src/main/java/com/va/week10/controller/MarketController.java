@@ -2,27 +2,22 @@ package com.va.week10.controller;
 
 import com.va.week10.MarketService;
 import com.va.week10.model.Market;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
 @RequestMapping("/market")
 public class MarketController {
+    private final MarketService marketService;
+    public MarketController(MarketService marketService){ this.marketService = marketService; }
 
-    @Autowired
-    private MarketService marketService;
-
-    // POST /market/process - Process a new market order
     @PostMapping("/process")
-    public Market processOrder(@RequestBody Market marketOrder) {
+    public Market processOrder(@Valid @RequestBody Market marketOrder) {
         return marketService.processMarketOrder(marketOrder);
     }
 
-    // GET /market/all - Fetch all market orders
     @GetMapping("/all")
-    public List<Market> getAllMarketOrders() {
-        return marketService.getAllMarketOrders();
-    }
+    public List<Market> getAllMarketOrders() { return marketService.getAllMarketOrders(); }
+    
 }

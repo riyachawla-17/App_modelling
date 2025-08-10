@@ -1,5 +1,9 @@
 package com.va.week10.model;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Positive;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -8,12 +12,35 @@ public class Market {
 
     @Id
     private String id;
-    private String stockSymbol;
-    private int quantity;
-    private String orderStatus;
-    private String processedBy;
 
-    // Getters and Setters
+    @NotBlank
+    @Pattern(regexp = "^[A-Z.]{1,10}$", message = "Stock symbol must be uppercase letters or dots")
+    private String stockSymbol;
+
+    @Positive
+    private int quantity;
+
+    @Positive
+    private double bid;
+
+    @Positive
+    private double ask;
+
+    @Positive
+    private double last;
+
+    @NotBlank
+    private String typeOfExchange; // NYSE, TSE, Nasdaq, etc.
+
+    @NotNull
+    private ConfirmationStatus confirmationStatus = ConfirmationStatus.PENDING;
+
+    public enum ConfirmationStatus {
+        PENDING, CONFIRMED, REJECTED
+    }
+
+    // ===== Getters and Setters =====
+
     public String getId() {
         return id;
     }
@@ -38,19 +65,43 @@ public class Market {
         this.quantity = quantity;
     }
 
-    public String getOrderStatus() {
-        return orderStatus;
+    public double getBid() {
+        return bid;
     }
 
-    public void setOrderStatus(String orderStatus) {
-        this.orderStatus = orderStatus;
+    public void setBid(double bid) {
+        this.bid = bid;
     }
 
-    public String getProcessedBy() {
-        return processedBy;
+    public double getAsk() {
+        return ask;
     }
 
-    public void setProcessedBy(String processedBy) {
-        this.processedBy = processedBy;
+    public void setAsk(double ask) {
+        this.ask = ask;
+    }
+
+    public double getLast() {
+        return last;
+    }
+
+    public void setLast(double last) {
+        this.last = last;
+    }
+
+    public String getTypeOfExchange() {
+        return typeOfExchange;
+    }
+
+    public void setTypeOfExchange(String typeOfExchange) {
+        this.typeOfExchange = typeOfExchange;
+    }
+
+    public ConfirmationStatus getConfirmationStatus() {
+        return confirmationStatus;
+    }
+
+    public void setConfirmationStatus(ConfirmationStatus confirmationStatus) {
+        this.confirmationStatus = confirmationStatus;
     }
 }
