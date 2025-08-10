@@ -1,0 +1,10 @@
+{
+  "tickerSymbol": "AAPL",
+  "bid": 189.9,
+  "ask": 190.2,
+  "last": 190.0,
+  "open": 188.0,
+  "close": 191.1,
+  "typeOfExchange": "NASDAQ",
+  "confirmationStatus": "OK"
+}
